@@ -1,10 +1,8 @@
 *.rbc
 capybara-*.html
-.rspec
+# .rspec
 /log
 /tmp
-/db/*.sqlite3
-/db/*.sqlite3-journal
 /public/system
 /coverage/
 /spec/tmp
@@ -47,3 +45,6 @@ bower.json
 # Ignore node_modules
 node_modules/
 
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key

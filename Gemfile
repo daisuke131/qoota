@@ -48,6 +48,7 @@ group :development, :test do
   gem "pry-rails"
   gem "rspec-rails"
   gem "rails-erd"
+  gem "active_model_serializers"
 end
 
 group :development do

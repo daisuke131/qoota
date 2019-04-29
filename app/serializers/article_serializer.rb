@@ -1,3 +1,3 @@
 class ArticleSerializer < ActiveModel::Serializer
-  attributes :id, :title, :body, :status, :user_id
+  attributes :title, :body
 end

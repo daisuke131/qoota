@@ -52,4 +52,14 @@ RSpec.describe "Articles", type: :request do
       expect(response).to have_http_status(204)
     end
   end
+
+  describe "DELETE /articles/:id" do
+    subject { delete article_path(article.id) }
+    let!(:article) { create(:article, user_id: current_user.id) }
+    let(:current_user) { create(:user) }
+    it "指定した記事のレコードが削除される" do
+      expect { subject }.to change { Article.count }.by(-1)
+      expect(response).to have_http_status(204)
+    end
+  end
 end

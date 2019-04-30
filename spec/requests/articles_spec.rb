@@ -29,7 +29,7 @@ RSpec.describe "Articles", type: :request do
         expect(res["body"]).to eq article.body
         expect(res["status"]).to eq article.status
         expect(res["user_id"]).to eq article.user_id
-        expect(response.status).to eq 200
+        expect(response).to have_http_status(200)
       end
     end
 
@@ -49,6 +49,20 @@ RSpec.describe "Articles", type: :request do
 
     it "記事のレコードが作成される" do
       expect { subject }.to change { Article.count }.by(1)
+      expect(response).to have_http_status(204)
+    end
+  end
+
+  describe "PATCH /articles/:id" do
+    subject { patch(article_path(article.id), params: params) }
+    let!(:article) { create(:article, user_id: current_user.id) }
+    let(:current_user) { create(:user) }
+    let(:params) { { article: { title: Faker::Lorem.sentence, created_at: Time.current } } }
+
+    it "指定した記事のレコードが更新される" do
+      expect { subject }.to change { Article.find(article.id).title }.from(article.title).to(params[:article][:title])
+      expect { subject }.not_to change { Article.find(article.id).body }
+      expect { subject }.not_to change { Article.find(article.id).created_at }
       expect(response).to have_http_status(204)
     end
   end

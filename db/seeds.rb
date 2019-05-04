@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password(8))
+10.times do
+  Article.create(
+  title: Faker::Lorem.sentence,
+  body: Faker::Markdown.emphasis,
+  user_id: user.id)
+end

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Articles", type: :request do
+RSpec.describe "Api::V1::Articles", type: :request do
   describe "GET /api/v1/articles" do
     subject { get(api_v1_articles_path) }
     before { create_list(:article, 3, user_id: user.id) }

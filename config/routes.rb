@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root "home#index"
-  get "/signin" => "home#index"
+  get "/sign_in" => "home#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api, { format: "json" } do
     namespace :v1 do

@@ -8,6 +8,6 @@ export default new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', name: 'home', component: HomeContainer },
-    { path: '/signin', name: 'signin', component: SigninContainer }
+    { path: '/sign_in', name: 'sign_in', component: SigninContainer },
   ],
 })

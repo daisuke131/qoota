@@ -1,0 +1,40 @@
+$backcolor: #00acee;
+
+.devise_form {
+  background: $backcolor;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 5px;
+  box-shadow: 0 0 8px gray;
+  text-align: center;
+  padding: 60px;
+  box-sizing: border-box;
+
+  .field {
+    padding: 10px;
+  }
+  h2 {
+    color: white;
+  }
+
+  form {
+    input {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      font-size: 16px;
+      padding: 10px;
+      box-sizing: border-box;
+      background: #bbb;
+      color: white;
+      border-radius: 5px;
+    }
+  }
+}

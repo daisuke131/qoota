@@ -30,10 +30,13 @@
   export default class LoginContainer extends Vue {
     email: string
     password: string
+
     async signIn(): Promise<void> {
       const params = { email: this.email, password: this.password }
-      debugger
       await axios.post("/api/v1/auth/sign_in", params ).then((response) => {
+        localStorage.setItem("access-token", response.headers["access-token"]);
+        localStorage.setItem("uid", response.headers["uid"]);
+        localStorage.setItem("client", response.headers["client"]);
         Router.push({ name: "home" })
       }).catch(() => {
         alert(SIGNIN_ERROR_MESSAGE)
@@ -43,7 +46,4 @@
 </script>
 
 <style scoped>
-.container {
-  padding: 20px;
-}
 </style>

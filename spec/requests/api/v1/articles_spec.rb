@@ -89,8 +89,4 @@ RSpec.describe "Api::V1::Articles", type: :request do
       expect(response).to have_http_status(204)
     end
   end
-
-  def auth_token(current_user)
-    current_user.create_new_auth_token
-  end
 end

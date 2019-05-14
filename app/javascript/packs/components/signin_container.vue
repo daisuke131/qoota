@@ -12,7 +12,7 @@
           <input type="password" name="password" placeholder="password" v-model="password">
         </div>
         <div class="field">
-          <button type="submit">Sign in</button>
+          <button type="submit" class="btn btn-primary">Sign in</button>
         </div>
       </form>
     </div>

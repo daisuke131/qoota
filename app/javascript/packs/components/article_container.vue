@@ -3,7 +3,7 @@
     <div>タイトル：{{article.title}}</div>
     <div>内容：{{article.body}}</div>
     <router-link :to="{ name : 'post_edit', params : { id: article.id }}">修正</router-link>
-    <a class="nav-link" href="#" @click="delete_article">削除</a>
+    <a class="nav-link" href="#" @click="deleteArticle">削除</a>
   </div>
 </template>
 
@@ -32,7 +32,7 @@
       })
     }
 
-    async delete_article(): Promise<void> {
+    async deleteArticle(): Promise<void> {
       axios.delete("/api/v1/articles/" + this.$route.params.id, this.currentStorage).then((response) => {
         alert("削除")
         this.$router.push({ name: "home" })

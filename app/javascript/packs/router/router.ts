@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import HomeContainer from '../components/home_container.vue'
 import SigninContainer from '../components/signin_container.vue'
 import ArticleContainer from '../components/article_container.vue'
-import PostNewContainer from '../components/post_new_container.vue'
-import PostEditContainer from '../components/post_edit_container.vue'
+import NewArticleContainer from '../components/new_article_container.vue'
+import EditArticleContainer from '../components/edit_article_container.vue'
 
 Vue.use(VueRouter)
 
@@ -14,8 +14,8 @@ const router = new VueRouter({
     { path: '/', name: 'home', component: HomeContainer },
     { path: '/sign_in', name: 'sign_in', component: SigninContainer },
     { path: '/article/:id', name: 'article', component: ArticleContainer },
-    { path: '/post/new', name: 'post_new', component: PostNewContainer, meta: { requiresAuth: true } },
-    { path: '/post/edit/:id', name: 'post_edit', component: PostEditContainer, meta: { requiresAuth: true } },
+    { path: '/article/new', name: 'article_new', component: NewArticleContainer, meta: { requiresAuth: true } },
+    { path: '/article/edit/:id', name: 'article_edit', component: EditArticleContainer, meta: { requiresAuth: true } },
   ],
 })
 

@@ -1,26 +1,26 @@
 <template>
   <div class="container">
-    <PostForm
+    <ArticleForm
     title = ""
     body = ""
     :status = "status_select"
     @submit="postNew"
-    ></PostForm>
+    ></ArticleForm>
   </div>
 </template>
 
 <script lang="ts">
   import axios from "axios"
   import { Vue, Component } from "vue-property-decorator"
-  import PostForm from './post_form_container.vue'
+  import ArticleForm from './article_form_container.vue'
 
-  const STATUS_SELECT = "published"
+  const statusSelect = "published"
 
   @Component ({
-    components: { PostForm },
+    components: { ArticleForm },
   })
-  export default class NewPostContainer extends Vue {
-    status_select = STATUS_SELECT
+  export default class NewArticleContainer extends Vue {
+    status_select = statusSelect
     currentStorage = {
       headers: {
         "access-token": localStorage["access-token"],

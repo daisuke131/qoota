@@ -21,7 +21,7 @@
               <router-link class="nav-link" :to="{ name: 'sign_in'}">サインイン</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'post_new'}">投稿</router-link>
+              <router-link class="nav-link" :to="{ name: 'article_new'}">投稿</router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" @click="signOut">サインアウト</a>

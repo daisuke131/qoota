@@ -2,7 +2,7 @@
   <div id="article-container">
     <div>タイトル：{{article.title}}</div>
     <div>内容：{{article.body}}</div>
-    <router-link :to="{ name : 'post_edit', params : { id: article.id }}">修正</router-link>
+    <router-link :to="{ name : 'article_edit', params : { id: article.id }}">修正</router-link>
     <a class="nav-link" href="#" @click="deleteArticle">削除</a>
   </div>
 </template>

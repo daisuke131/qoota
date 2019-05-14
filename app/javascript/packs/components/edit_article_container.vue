@@ -1,27 +1,27 @@
 <template>
   <div class="container">
-    <PostForm
+    <ArticleForm
     :title = "article.title"
     :body = "article.body"
     :status = "article.status"
     @submit="postEdit"
-    ></PostForm>
+    ></ArticleForm>
   </div>
 </template>
 
 <script lang="ts">
   import axios from "axios"
   import { Vue, Component } from "vue-property-decorator"
-  import PostForm from './post_form_container.vue'
+  import ArticleForm from './article_form_container.vue'
 
-  const STATUS_SELECT = "published"
+  const statusSelect = "published"
 
   @Component ({
-    components: { PostForm },
+    components: { ArticleForm },
   })
-  export default class EditPostContainer extends Vue {
+  export default class EditArticleContainer extends Vue {
     article: String[] = []
-    status = STATUS_SELECT
+    status = statusSelect
     currentStorage = {
       headers: {
         "access-token": localStorage["access-token"],

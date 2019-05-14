@@ -58,3 +58,5 @@ yarn-debug.log*
 .yarn-integrity
 
 *.css
+!application.css
+!reset.css

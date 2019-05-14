@@ -42,34 +42,38 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
-import { Vue, Component } from "vue-property-decorator"
-import VueRouter from 'vue-router'
-Vue.use(VueRouter);
+  import axios from "axios";
+  import { Vue, Component } from "vue-property-decorator"
+  import VueRouter from "vue-router"
+  import BootstrapVue from "bootstrap-vue"
+  import "bootstrap/dist/css/bootstrap.css"
+  import "bootstrap-vue/dist/bootstrap-vue.css"
+  Vue.use(BootstrapVue)
+  Vue.use(VueRouter)
 
-@Component
-export default class HeaderContainer extends Vue {
-  currentStorage = {
-    headers: {
-      "access-token": localStorage["access-token"],
-      "client": localStorage["client"],
-      "uid": localStorage["uid"]
+  @Component
+  export default class HeaderContainer extends Vue {
+    currentStorage = {
+      headers: {
+        "access-token": localStorage["access-token"],
+        "client": localStorage["client"],
+        "uid": localStorage["uid"]
+      }
+    }
+    async signOut(): Promise<void> {
+      await axios.delete("/api/v1/auth/sign_out", this.currentStorage).then(() => {
+        localStorage.clear();
+        alert("サインアウト")
+        this.$router.push({ name: "sign_in" })
+      }).catch(() => {
+        alert("サインアウト失敗")
+      })
     }
   }
-  async signOut(): Promise<void> {
-    await axios.delete("/api/v1/auth/sign_out", this.currentStorage).then(() => {
-      localStorage.clear();
-      alert("サインアウト")
-      this.$router.push({ name: "sign_in" })
-    }).catch(() => {
-      alert("サインアウト失敗")
-    })
-  }
-}
 </script>
 
 <style scoped>
-header {
-  background-color: #00acee;
-}
+  header {
+    background-color: #00acee;
+  }
 </style>

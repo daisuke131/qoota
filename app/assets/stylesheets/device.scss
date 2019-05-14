@@ -2,7 +2,7 @@ $backcolor: #00acee;
 
 .devise_form {
   background: $backcolor;
-  margin: 0 auto;
+  margin: 50px auto;
   width: 100%;
   max-width: 500px;
   border-radius: 5px;
@@ -32,9 +32,6 @@ $backcolor: #00acee;
       font-size: 16px;
       padding: 10px;
       box-sizing: border-box;
-      background: #bbb;
-      color: white;
-      border-radius: 5px;
     }
   }
 }

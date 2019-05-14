@@ -35,13 +35,13 @@
     }
 
     async fetchHome(): Promise<void> {
-      await axios.get("/api/v1/articles/" + this.$route.params.id).then((response) => {
+      await axios.get(`/api/v1/articles/${ this.$route.params.id }`).then((response) => {
         this.article = response.data
       })
     }
 
     postEdit(params) {
-      axios.put("/api/v1/articles/" + this.$route.params.id, params, this.currentStorage).then((response) => {
+      axios.put(`/api/v1/articles/${ this.$route.params.id }`, params, this.currentStorage).then((response) => {
         this.$router.push({ name: "home" })
       }).catch(() => {
         alert("だめ")

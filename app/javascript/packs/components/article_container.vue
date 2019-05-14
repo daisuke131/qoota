@@ -27,13 +27,13 @@
     }
 
     async fetchHome(): Promise<void> {
-      await axios.get("/api/v1/articles/" + this.$route.params.id).then((response) => {
+      await axios.get(`/api/v1/articles/${ this.$route.params.id }`).then((response) => {
         this.article = response.data
       })
     }
 
     async deleteArticle(): Promise<void> {
-      axios.delete("/api/v1/articles/" + this.$route.params.id, this.currentStorage).then((response) => {
+      axios.delete(`/api/v1/articles/${this.$route.params.id}`, this.currentStorage).then((response) => {
         alert("削除")
         this.$router.push({ name: "home" })
       })

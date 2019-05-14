@@ -60,6 +60,7 @@
         "uid": localStorage["uid"]
       }
     }
+
     async signOut(): Promise<void> {
       await axios.delete("/api/v1/auth/sign_out", this.currentStorage).then(() => {
         localStorage.clear();

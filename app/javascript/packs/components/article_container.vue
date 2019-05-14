@@ -42,9 +42,9 @@
 </script>
 
 <style scoped>
-ul li {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  list-style: none;
-}
+  ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    list-style: none;
+  }
 </style>

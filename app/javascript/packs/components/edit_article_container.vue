@@ -14,14 +14,11 @@
   import { Vue, Component } from "vue-property-decorator"
   import ArticleForm from './article_form_container.vue'
 
-  const statusSelect = "published"
-
   @Component ({
     components: { ArticleForm },
   })
   export default class EditArticleContainer extends Vue {
     article: String[] = []
-    status = statusSelect
     currentStorage = {
       headers: {
         "access-token": localStorage["access-token"],

@@ -3,7 +3,7 @@
     <ArticleForm
     title = ""
     body = ""
-    :status = "status_select"
+    :status = "statusSelect"
     @submit="postNew"
     ></ArticleForm>
   </div>
@@ -14,13 +14,13 @@
   import { Vue, Component } from "vue-property-decorator"
   import ArticleForm from './article_form_container.vue'
 
-  const statusSelect = "published"
+  const STATUS_SELECT = "published"
 
   @Component ({
     components: { ArticleForm },
   })
   export default class NewArticleContainer extends Vue {
-    status_select = statusSelect
+    statusSelect = STATUS_SELECT
     currentStorage = {
       headers: {
         "access-token": localStorage["access-token"],

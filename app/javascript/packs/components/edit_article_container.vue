@@ -12,20 +12,14 @@
 <script lang="ts">
   import axios from "axios"
   import { Vue, Component } from "vue-property-decorator"
-  import ArticleForm from './article_form_container.vue'
+  import ArticleForm from "./article_form_container.vue"
+  import { getHeaders } from "../utils/auth"
 
   @Component ({
     components: { ArticleForm },
   })
   export default class EditArticleContainer extends Vue {
     article: String[] = []
-    currentStorage = {
-      headers: {
-        "access-token": localStorage["access-token"],
-        "client": localStorage["client"],
-        "uid": localStorage["uid"]
-      }
-    }
 
     async mounted(): Promise<void> {
       await this.fetchHome();
@@ -38,7 +32,7 @@
     }
 
     postEdit(params) {
-      axios.put(`/api/v1/articles/${ this.$route.params.id }`, params, this.currentStorage).then((response) => {
+      axios.put(`/api/v1/articles/${ this.$route.params.id }`, params, getHeaders()).then((response) => {
         this.$router.push({ name: "home" })
       }).catch(() => {
         alert("だめ")

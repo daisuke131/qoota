@@ -12,7 +12,8 @@
 <script lang="ts">
   import axios from "axios"
   import { Vue, Component } from "vue-property-decorator"
-  import ArticleForm from './article_form_container.vue'
+  import ArticleForm from "./article_form_container.vue"
+  import { getHeaders } from "../utils/auth"
 
   const STATUS_SELECT = "published"
 
@@ -21,16 +22,9 @@
   })
   export default class NewArticleContainer extends Vue {
     statusSelect = STATUS_SELECT
-    currentStorage = {
-      headers: {
-        "access-token": localStorage["access-token"],
-        "client": localStorage["client"],
-        "uid": localStorage["uid"]
-      }
-    }
 
     postNew(params) {
-      axios.post("/api/v1/articles", params, this.currentStorage).then((response) => {
+      axios.post("/api/v1/articles", params, getHeaders()).then((response) => {
         this.$router.push({ name: "home" })
       }).catch(() => {
         alert("だめ")

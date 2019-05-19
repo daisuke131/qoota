@@ -1,8 +1,9 @@
 <template>
   <div id="article-container">
+    <div>投稿者：{{article.user.name}}</div>
     <div>タイトル：{{article.title}}</div>
     <div>内容：{{article.body}}</div>
-    <div v-if="currentUserID == userID">
+    <div v-if="currentUserId == article.user.id">
       <router-link :to="{ name : 'article_edit', params : { id: article.id }}">修正</router-link>
       <a class="nav-link" href="#" @click="deleteArticle">削除</a>
     </div>
@@ -17,8 +18,7 @@
   @Component
   export default class ArticleContainer extends Vue {
     article: String[] = []
-    userID = ""
-    currentUserID = localStorage.getItem("current-user-id")
+    currentUserId = localStorage.getItem("current-user-id")
 
     async mounted(): Promise<void> {
       await this.fetchHome();
@@ -27,7 +27,6 @@
     async fetchHome(): Promise<void> {
       await axios.get(`/api/v1/articles/${ this.$route.params.id }`).then((response) => {
         this.article = response.data
-        this.userID = response.data.user_id
       })
     }
 

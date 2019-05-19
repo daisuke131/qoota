@@ -9,7 +9,7 @@ class Api::V1::ArticlesController < ApplicationController
 
   def show
     @article = Article.published.find(params[:id])
-    render json: @article.to_json(:include => [:user])
+    render json: @article
   end
 
   def create

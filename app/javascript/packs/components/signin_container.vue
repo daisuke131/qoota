@@ -22,7 +22,7 @@
 <script lang="ts">
   import axios from "axios"
   import { Vue, Component } from "vue-property-decorator"
-  import { localStorageSetitem } from "../utils/auth"
+  import { localStorageGetitem } from "../utils/auth"
   const SIGNIN_ERROR_MESSAGE = "メールアドレスかパスワードが間違ってますけども！"
 
   @Component
@@ -33,7 +33,7 @@
     async signIn(): Promise<void> {
       const params = { email: this.email, password: this.password }
       await axios.post("/api/v1/auth/sign_in", params ).then((response) => {
-        localStorageSetitem(response)
+        localStorageGetitem(response)
         this.$router.push({ name: "home" })
       }).catch(() => {
         alert(SIGNIN_ERROR_MESSAGE)

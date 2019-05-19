@@ -12,11 +12,11 @@ export function getHeaders() {
   }
 }
 
-export function localStorageSetitem(response_data) {
-  localStorage.setItem("current-user-id", response_data.data.data.id);
-  localStorage.setItem("access-token", response_data.headers[ACCESS_TOKEN_KEY]);
-  localStorage.setItem("client", response_data.headers[CLIENT_KEY]);
-  localStorage.setItem("uid", response_data.headers[UID_KEY]);
+export function localStorageGetitem(responseData) {
+  localStorage.setItem("current-user-id", responseData.data.data.id);
+  localStorage.setItem("access-token", responseData.headers[ACCESS_TOKEN_KEY]);
+  localStorage.setItem("client", responseData.headers[CLIENT_KEY]);
+  localStorage.setItem("uid", responseData.headers[UID_KEY]);
 }
 
 export function isSignIn() {

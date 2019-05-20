@@ -77,4 +77,14 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
       end
     end
   end
+
+  describe "DELETE /api/v1/auth" do
+    subject { delete(api_v1_user_registration_path, headers: auth_token(current_user)) }
+    let!(:current_user) { create(:user) }
+
+    it "指定したユーザーのレコードが削除される" do
+      expect { subject }.to change { User.count }.by(-1)
+      expect(response).to have_http_status(200)
+    end
+  end
 end

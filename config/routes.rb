@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   root "home#index"
+
+  # デプロイ時不要
+  get "/sign_in", to: "home#index"
+  get "/post/new", to: "home#index"
+  get "/post/edit/:id", to: "home#index"
+  get "/article/:id", to: "home#index"
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api, { format: "json" } do
     namespace :v1 do

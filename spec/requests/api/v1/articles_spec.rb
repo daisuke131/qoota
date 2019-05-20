@@ -11,8 +11,14 @@ RSpec.describe "Api::V1::Articles", type: :request do
         subject
         res = JSON.parse(response.body)
         expect(res.count).to eq 3
-        expect(res[0].keys).to eq ["id","title", "body", "status"]
+        expect(res[0].keys).to eq ["id", "title", "body", "status", "user"]
         expect(response.status).to eq 200
+      end
+
+      it "投稿者情報も取得できる" do
+        subject
+        res = JSON.parse(response.body)
+        expect(res[0]["user"].keys).to eq ["id","name", "email"]
       end
     end
 
@@ -41,7 +47,15 @@ RSpec.describe "Api::V1::Articles", type: :request do
         res = JSON.parse(response.body)
         expect(res["title"]).to eq article.title
         expect(res["body"]).to eq article.body
+        expect(res["status"]).to eq article.status
         expect(response).to have_http_status(200)
+      end
+
+      it "投稿者情報も取得できる" do
+        subject
+        res = JSON.parse(response.body)
+        expect(res["user"]["name"]).to eq article.user.name
+        expect(res["user"]["email"]).to eq article.user.email
       end
     end
 

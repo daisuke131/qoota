@@ -17,16 +17,15 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'sign_in'}">サインイン</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'article_new'}">投稿</router-link>
-            </li>
-            <li class="nav-item">
+            <router-link tag="li" class="nav-item nav-link" :to="{ name: 'article_new'}">投稿</router-link>
+            <li v-if="isSignedIn()" class="nav-item">
               <a class="nav-link" href="#" @click="signOut">サインアウト</a>
             </li>
+            <router-link v-else tag="li" class="nav-item nav-link" :to="{ name: 'sign_in'}">サインイン</router-link>
           </ul>
+          <!-- <ul  class="navbar-nav mr-auto">
+            <router-link tag="li" class="nav-item nav-link" :to="{ name: 'sign_in'}">サインイン</router-link>
+          </ul> -->
           <form class="form-inline my-2 my-lg-0">
             <input
               class="form-control mr-sm-2"
@@ -45,6 +44,7 @@
   import axios from "axios";
   import { Vue, Component } from "vue-property-decorator"
   import VueRouter from "vue-router"
+  import { isSignIn, getHeaders } from "../utils/auth"
   import BootstrapVue from "bootstrap-vue"
   import "bootstrap/dist/css/bootstrap.css"
   import "bootstrap-vue/dist/bootstrap-vue.css"
@@ -53,22 +53,18 @@
 
   @Component
   export default class HeaderContainer extends Vue {
-    currentStorage = {
-      headers: {
-        "access-token": localStorage["access-token"],
-        "client": localStorage["client"],
-        "uid": localStorage["uid"]
-      }
-    }
-
     async signOut(): Promise<void> {
-      await axios.delete("/api/v1/auth/sign_out", this.currentStorage).then(() => {
+      await axios.delete("/api/v1/auth/sign_out", getHeaders()).then(() => {
         localStorage.clear();
         alert("サインアウト")
         this.$router.push({ name: "sign_in" })
       }).catch(() => {
         alert("サインアウト失敗")
       })
+    }
+
+    isSignedIn() {
+      return isSignIn()
     }
   }
 </script>

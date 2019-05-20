@@ -35,6 +35,7 @@
       await axios.post("/api/v1/auth/sign_in", params ).then((response) => {
         localStorageGetitem(response)
         this.$router.push({ name: "home" })
+        window.location.reload();
       }).catch(() => {
         alert(SIGNIN_ERROR_MESSAGE)
       })

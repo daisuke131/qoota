@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   # デプロイ時不要
   get "/sign_in", to: "home#index"
+  get "/sign_up", to: "home#index"
+  get "/user/:id", to: "home#index"
   get "/post/new", to: "home#index"
   get "/post/edit/:id", to: "home#index"
   get "/article/:id", to: "home#index"

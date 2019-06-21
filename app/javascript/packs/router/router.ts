@@ -2,6 +2,9 @@ import Vue from 'vue/dist/vue.esm.js'
 import VueRouter from 'vue-router'
 import HomeContainer from '../components/home_container.vue'
 import SigninContainer from '../components/signin_container.vue'
+import SignupContainer from '../components/signup_container.vue'
+import UserContainer from '../components/user_container.vue'
+import EditUserContainer from '../components/edit_user_container.vue'
 import ArticleContainer from '../components/article_container.vue'
 import NewArticleContainer from '../components/new_article_container.vue'
 import EditArticleContainer from '../components/edit_article_container.vue'
@@ -14,6 +17,9 @@ const router = new VueRouter({
   routes: [
     { path: '/', name: 'home', component: HomeContainer },
     { path: '/sign_in', name: 'sign_in', component: SigninContainer },
+    { path: '/sign_up', name: 'sign_up', component: SignupContainer },
+    { path: '/user/:id', name: 'user', component: UserContainer },
+    { path: '/user/edit/:id', name: 'user_edit', component: EditUserContainer },
     { path: '/article/:id', name: 'article', component: ArticleContainer },
     { path: '/article/new', name: 'article_new', component: NewArticleContainer, meta: { requiresAuth: true } },
     { path: '/article/edit/:id', name: 'article_edit', component: EditArticleContainer, meta: { requiresAuth: true } },

@@ -15,6 +15,7 @@
           <button type="submit" class="btn btn-primary" @click.prevent="signIn">Sign in</button>
         </div>
       </form>
+      <router-link :to="{ name: 'sign_up'}">アカウント作成</router-link>
     </div>
   </div>
 </template>
@@ -23,10 +24,12 @@
   import axios from "axios"
   import { Vue, Component } from "vue-property-decorator"
   import { localStorageGetitem } from "../utils/auth"
+  import VueRouter from "vue-router"
+  Vue.use(VueRouter)
   const SIGNIN_ERROR_MESSAGE = "メールアドレスかパスワードが間違ってますけども！"
 
   @Component
-  export default class LoginContainer extends Vue {
+  export default class SigninContainer extends Vue {
     email = ""
     password = ""
 

@@ -50,12 +50,13 @@
         window.location.reload();
       }).catch(() => {
         alert("サインアウト失敗")
+        localStorage.clear();
         this.$router.push({ name: "sign_in" })
+        window.location.reload();
       })
     }
 
     getUserName() {
-      debugger
       axios.get(`/api/v1/users/${ this.currentUserId }`).then((response) => {
         this.name = response.data.name
       }).catch(() => {

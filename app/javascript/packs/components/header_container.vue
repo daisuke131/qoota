@@ -1,41 +1,26 @@
 <template>
   <header>
     <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <router-link to="/" class="navbar-brand">Qiita</router-link>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <b-navbar toggleable="lg" type="dark">
+        <b-navbar-brand to="/">Qiita</b-navbar-brand>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-collapse id="nav-collapse" is-nav>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <router-link tag="li" class="nav-item nav-link" :to="{ name: 'article_new'}">投稿</router-link>
-            <li v-if="isSignedIn()" class="nav-item">
-              <a class="nav-link" href="#" @click="signOut">サインアウト</a>
-            </li>
-            <router-link v-else tag="li" class="nav-item nav-link" :to="{ name: 'sign_in'}">サインイン</router-link>
-          </ul>
-          <!-- <ul  class="navbar-nav mr-auto">
-            <router-link tag="li" class="nav-item nav-link" :to="{ name: 'sign_in'}">サインイン</router-link>
-          </ul> -->
-          <form class="form-inline my-2 my-lg-0">
-            <input
-              class="form-control mr-sm-2"
-              type="text"
-              placeholder="Search"
-              aria-label="Search"
-            >
-          </form>
-        </div>
-      </nav>
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item-dropdown right v-if="isSignedIn()">
+              <template slot="button-content"><em>{{ name }}</em></template>
+              <b-dropdown-item :to="{ name: 'user', params: { id: currentUserId }}">ユーザー情報</b-dropdown-item>
+              <b-dropdown-item @click="signOut">サインアウト</b-dropdown-item>
+            </b-nav-item-dropdown>
+            <b-nav-item v-else :to="{ name: 'sign_in'}">サインイン</b-nav-item>
+            <router-link class="mr-3 btn btn-success" :to="{ name: 'article_new'}">投稿</router-link>
+            <b-nav-form>
+              <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+            </b-nav-form>
+          </b-navbar-nav>
+
+        </b-collapse>
+      </b-navbar>
     </div>
   </header>
 </template>
@@ -53,18 +38,39 @@
 
   @Component
   export default class HeaderContainer extends Vue {
+    currentUserId = localStorage.getItem("current-user-id")
+    user = []
+    name = ""
+
     async signOut(): Promise<void> {
       await axios.delete("/api/v1/auth/sign_out", getHeaders()).then(() => {
         localStorage.clear();
         alert("サインアウト")
         this.$router.push({ name: "sign_in" })
+        window.location.reload();
       }).catch(() => {
         alert("サインアウト失敗")
+        this.$router.push({ name: "sign_in" })
       })
     }
 
+    getUserName() {
+      debugger
+      axios.get(`/api/v1/users/${ this.currentUserId }`).then((response) => {
+        this.name = response.data.name
+      }).catch(() => {
+        alert("タイムアウト")
+        this.$router.push({ name: "sign_in" })
+      })
+    }
+
+    // サインインしてるかどうかの判定
     isSignedIn() {
-      return isSignIn()
+      const signedInFlg = isSignIn()
+      if(signedInFlg) {
+        this.getUserName()
+      }
+      return signedInFlg
     }
   }
 </script>

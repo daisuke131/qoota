@@ -1,10 +1,10 @@
 <template>
   <div id="article-container">
-    <div>投稿者：{{article.user.name}}</div>
-    <div>タイトル：{{article.title}}</div>
-    <div>内容：{{article.body}}</div>
+    <div>投稿者：{{ article.user.name }}</div>
+    <div>タイトル：{{ article.title }}</div>
+    <div>内容：{{ article.body }}</div>
     <div v-if="currentUserId == article.user.id">
-      <router-link :to="{ name : 'article_edit', params : { id: article.id }}">修正</router-link>
+      <router-link :to="{ name : 'article_edit', params: { id: article.id }}">修正</router-link>
       <a class="nav-link" href="#" @click="deleteArticle">削除</a>
     </div>
   </div>

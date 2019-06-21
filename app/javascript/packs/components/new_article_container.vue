@@ -26,7 +26,7 @@
     postNew(params) {
       axios.post("/api/v1/articles", params, getHeaders()).then((response) => {
         this.$router.push({ name: "home" })
-      }).catch(() => {
+      }).catch((error) => {
         alert("だめ")
       })
     }

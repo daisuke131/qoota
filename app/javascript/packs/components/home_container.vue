@@ -2,7 +2,7 @@
   <div id="home-container">
     <ul>
       <li v-for="article in articles" :key="article.id">
-        <router-link :to="{ name : 'article', params : { id: article.id }}">
+        <router-link :to="{ name : 'article', params: { id: article.id }}">
           <div>{{article.title}}</div>
         </router-link>
         <div>{{article.body}}</div>

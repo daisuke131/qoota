@@ -34,7 +34,7 @@ Vue.use(InfiniteLoading);
 export default class UserContainer extends Vue {
   user: string[] = [];
   articles: string[] = [];
-  articles_list: string[] = [];
+  articlesList: string[] = [];
   page: number = 0;
 
   //記事一覧無限スクロール
@@ -47,9 +47,9 @@ export default class UserContainer extends Vue {
       })
       .then(({ data }) => {
         this.user = data;
-        this.articles_list = data.articles.slice(this.page, this.page + 10);
-        if (this.articles_list.length) {
-          this.articles.push(...this.articles_list);
+        this.articlesList = data.articles.slice(this.page, this.page + 10);
+        if (this.articlesList.length) {
+          this.articles.push(...this.articlesList);
           this.page += 10;
           $state.loaded();
         } else {

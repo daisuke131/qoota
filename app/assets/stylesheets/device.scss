@@ -17,6 +17,16 @@ $backcolor: #00acee;
   h2 {
     color: white;
   }
+  a {
+    color: white;
+    &:hover {
+      color: darken(white, 10%);
+      text-decoration: none;
+    }
+  }
+  .error-message {
+    color: red
+  }
 
   form {
     input {

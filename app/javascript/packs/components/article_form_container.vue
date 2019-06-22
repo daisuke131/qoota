@@ -8,9 +8,7 @@
         <div class="field col-6 p-0">
           <textarea class="w-100" name="body" v-model="body"/>
         </div>
-        <div class="field col-6 p-0 border">
-          {{ body }}
-        </div>
+        <div class="field col-6 p-0 border">{{ body }}</div>
       </div>
       <div class="field">
         <select name="status" v-model="status">
@@ -24,18 +22,22 @@
 </template>
 
 <script lang="ts">
-  import axios from "axios"
-  import { Vue, Component, Prop, Emit } from "vue-property-decorator"
+import axios from "axios";
+import { Vue, Component, Prop, Emit } from "vue-property-decorator";
 
-  @Component
-  export default class PostContainer extends Vue {
-    form_data = {}
-    @Prop(String)title
-    @Prop(String)body
-    @Prop(String)status
-    @Emit()
-    submit() {
-      return this.form_data = { title: this.title, body: this.body, status: this.status }
-    }
+@Component
+export default class PostContainer extends Vue {
+  form_data = {};
+  @Prop(String) title;
+  @Prop(String) body;
+  @Prop(String) status;
+  @Emit()
+  submit() {
+    return (this.form_data = {
+      title: this.title,
+      body: this.body,
+      status: this.status
+    });
   }
+}
 </script>

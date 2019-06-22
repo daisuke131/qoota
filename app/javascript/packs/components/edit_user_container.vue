@@ -40,7 +40,7 @@ export default class EditUserContainer extends Vue {
   name: string = "";
   email: string = "";
   password: string = "";
-  errorMessages: string = "";
+  errorMessages: string[] = [];
 
   async mounted(): Promise<void> {
     await this.fetchHome();

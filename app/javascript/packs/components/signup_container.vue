@@ -37,7 +37,7 @@ export default class SignupContainer extends Vue {
   name: string = "";
   email: string = "";
   password: string = "";
-  errorMessages: string = "";
+  errorMessages: string[] = [];
 
   async signUp(): Promise<void> {
     const params = {

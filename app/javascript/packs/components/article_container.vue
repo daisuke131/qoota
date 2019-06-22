@@ -11,30 +11,34 @@
 </template>
 
 <script lang="ts">
-  import axios from "axios"
-  import { Vue, Component } from "vue-property-decorator"
-  import { getHeaders } from "../utils/auth"
+import axios from "axios";
+import { Vue, Component } from "vue-property-decorator";
+import { getHeaders } from "../utils/auth";
 
-  @Component
-  export default class ArticleContainer extends Vue {
-    article: String[] = []
-    currentUserId = localStorage.getItem("current-user-id")
+@Component
+export default class ArticleContainer extends Vue {
+  article: string[] = [];
+  currentUserId: string = localStorage.getItem("current-user-id");
 
-    async mounted(): Promise<void> {
-      await this.fetchHome();
-    }
-
-    async fetchHome(): Promise<void> {
-      await axios.get(`/api/v1/articles/${ this.$route.params.id }`).then((response) => {
-        this.article = response.data
-      })
-    }
-
-    async deleteArticle(): Promise<void> {
-      axios.delete(`/api/v1/articles/${this.$route.params.id}`, getHeaders()).then((response) => {
-        alert("削除")
-        this.$router.push({ name: "home" })
-      })
-    }
+  async mounted(): Promise<void> {
+    await this.fetchHome();
   }
+
+  async fetchHome(): Promise<void> {
+    await axios
+      .get(`/api/v1/articles/${this.$route.params.id}`)
+      .then(response => {
+        this.article = response.data;
+      });
+  }
+
+  async deleteArticle(): Promise<void> {
+    axios
+      .delete(`/api/v1/articles/${this.$route.params.id}`, getHeaders())
+      .then(response => {
+        alert("削除");
+        this.$router.push({ name: "home" });
+      });
+  }
+}
 </script>

@@ -1,7 +1,10 @@
 <template>
   <div id="user-container">
     <h2>{{ user.name }}</h2>
-    <router-link :to="{ name: 'user_edit', params: { id: this.$route.params.id }}" class="btn btn-primary">ユーザー情報編集</router-link>
+    <router-link
+      :to="{ name: 'user_edit', params: { id: this.$route.params.id }}"
+      class="btn btn-primary"
+    >ユーザー情報編集</router-link>
     <b-tabs class="mt-5" content-class="mt-3">
       <b-tab title="記事一覧" active>
         <ul>
@@ -22,27 +25,29 @@
 </template>
 
 <script lang="ts">
-  import axios from "axios"
-  import { Vue, Component } from "vue-property-decorator"
-  import InfiniteLoading from "vue-infinite-loading"
-  Vue.use(InfiniteLoading);
+import axios from "axios";
+import { Vue, Component } from "vue-property-decorator";
+import InfiniteLoading from "vue-infinite-loading";
+Vue.use(InfiniteLoading);
 
-  @Component
-  export default class UserContainer extends Vue {
-    user = []
-    articles = []
-    articles_list = []
-    page = 0
+@Component
+export default class UserContainer extends Vue {
+  user: string[] = [];
+  articles: string[] = [];
+  articles_list: string[] = [];
+  page: number = 0;
 
-    //記事一覧無限スクロール
-    infiniteHandler($state) {
-      axios.get(`/api/v1/users/${ this.$route.params.id }`, {
+  //記事一覧無限スクロール
+  infiniteHandler($state) {
+    axios
+      .get(`/api/v1/users/${this.$route.params.id}`, {
         params: {
-          page: this.page,
-        },
-      }).then(({ data }) => {
-        this.user = data
-        this.articles_list = data.articles.slice(this.page,this.page+10)
+          page: this.page
+        }
+      })
+      .then(({ data }) => {
+        this.user = data;
+        this.articles_list = data.articles.slice(this.page, this.page + 10);
         if (this.articles_list.length) {
           this.articles.push(...this.articles_list);
           this.page += 10;
@@ -50,9 +55,9 @@
         } else {
           $state.complete();
         }
-      })
-    }
+      });
   }
+}
 </script>
 
 <style scoped lang="scss">

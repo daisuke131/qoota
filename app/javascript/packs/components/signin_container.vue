@@ -21,27 +21,30 @@
 </template>
 
 <script lang="ts">
-  import axios from "axios"
-  import { Vue, Component } from "vue-property-decorator"
-  import { localStorageGetitem } from "../utils/auth"
-  import VueRouter from "vue-router"
-  Vue.use(VueRouter)
-  const SIGNIN_ERROR_MESSAGE = "メールアドレスかパスワードが間違ってますけども！"
+import axios from "axios";
+import { Vue, Component } from "vue-property-decorator";
+import { localStorageGetitem } from "../utils/auth";
+import VueRouter from "vue-router";
+Vue.use(VueRouter);
+const SIGNIN_ERROR_MESSAGE = "メールアドレスかパスワードが間違ってますけども！";
 
-  @Component
-  export default class SigninContainer extends Vue {
-    email = ""
-    password = ""
+@Component
+export default class SigninContainer extends Vue {
+  email: string = "";
+  password: string = "";
 
-    async signIn(): Promise<void> {
-      const params = { email: this.email, password: this.password }
-      await axios.post("/api/v1/auth/sign_in", params ).then((response) => {
-        localStorageGetitem(response)
-        this.$router.push({ name: "home" })
+  async signIn(): Promise<void> {
+    const params = { email: this.email, password: this.password };
+    await axios
+      .post("/api/v1/auth/sign_in", params)
+      .then(response => {
+        localStorageGetitem(response);
+        this.$router.push({ name: "home" });
         window.location.reload();
-      }).catch(() => {
-        alert(SIGNIN_ERROR_MESSAGE)
       })
-    }
+      .catch(() => {
+        alert(SIGNIN_ERROR_MESSAGE);
+      });
   }
+}
 </script>

@@ -52,7 +52,6 @@ export default class HeaderContainer extends Vue {
       })
       .catch(() => {
         alert("サインアウト失敗");
-        localStorage.clear();
         this.$router.push({ name: "sign_in" });
         window.location.reload();
       });

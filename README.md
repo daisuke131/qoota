@@ -18,5 +18,5 @@ $ bundle exec rspec
 ```
 And coding style tests
 ```sh
-$ budle exec rubocop
+$ bundle exec rubocop
 ```

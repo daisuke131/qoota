@@ -3,7 +3,7 @@
 
 Getting Started!
 
-Prerequisites
+Version
 ```
 Ruby...2.6.1 
 Rails...5.2.3
@@ -20,3 +20,4 @@ And coding style tests
 ```sh
 $ bundle exec rubocop
 ```
+Thank you!
